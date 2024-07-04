@@ -8,15 +8,19 @@ import ToastNotification, {
 } from "../Components/Reusable/ToastNotification";
 
 const VoiceToTextPage = () => {
+  // State to store the text input
   const [textInput, setTextInput] = useState("");
 
+  // Custom hook for voice to text functionality
   const { isListening, transcript, startListening, stopListening } =
     useVoiceToText({ continuous: true });
 
+  // Function to start and stop listening
   const startAndStopListening = () => {
     isListening ? stopVoiceInput() : startListening();
   };
 
+  // Function to stop voice input and update the text input
   const stopVoiceInput = () => {
     setTextInput(
       (prev) =>
@@ -25,7 +29,7 @@ const VoiceToTextPage = () => {
     stopListening();
   };
 
-  //Copy the text in the text area or value of "textInput" to the clipboard
+  // Function to copy the text to the clipboard and show a notification
   const handleCopy = () => {
     navigator.clipboard
       .writeText(textInput)
@@ -37,19 +41,9 @@ const VoiceToTextPage = () => {
       });
   };
 
-  //   useEffect(() => {
-  //     if (!isListening && transcript) {
-  //       setTextInput((prev) => prev + (prev.length ? " " : "") + transcript);
-  //     }
-  //   }, [transcript, isListening]);
-
-  useEffect(() => {
-    console.log("isListening useEffect", isListening);
-    console.log("Transcript useEffect", transcript);
-    console.log("Text input useEffect", textInput);
-  }, [isListening, transcript, textInput]);
   return (
     <div className="w-full min-h-screen  bg-gradient-to-r from-darkColor to-secondary text-white p-4">
+      {/* Header Component */}
       <Header />
       <div className="w-full min-h-screen flex flex-col justify-center items-center ">
         <header className="text-center mb-8">
@@ -61,7 +55,7 @@ const VoiceToTextPage = () => {
           </p>
         </header>
         <div className="w-full max-w-4xl flex flex-col justify-center items-center gap-y-4">
-          {/* Start and stop the speech conversion */}
+          {/* Button to start and stop the speech conversion */}
           <button
             className={`bg-green-600 text-white rounded-lg px-6 py-3 ${
               isListening ? "bg-red-400" : "bg-green-400"
@@ -70,7 +64,7 @@ const VoiceToTextPage = () => {
           >
             {isListening ? "Stop Recording" : "Start Speaking"}
           </button>
-          {/* Text area */}
+          {/* Text area to display the transcribed text */}
           <textarea
             className="w-full max-w-4xl min-h-[200px] border border-blue-400 p-4 text-black rounded-lg"
             disabled={isListening}
@@ -87,17 +81,18 @@ const VoiceToTextPage = () => {
               setTextInput(e.target.value);
             }}
           />
-          {/* Copy button */}
+          {/* Button to copy the text to the clipboard */}
           <button
             className="bg-action text-white rounded-lg px-6 py-3 hover:scale-105 transform transition-transform"
             onClick={handleCopy}
           >
             Copy to Clipboard
           </button>
-          {/* Download Component */}
+          {/* Download Component to download the text as PDF or Word */}
           <DownloadText text={textInput} />
         </div>
       </div>
+      {/* Toast Notification Component */}
       <ToastNotification />
     </div>
   );

@@ -5,21 +5,33 @@ import { FaMicrophone, FaMicrophoneSlash } from "react-icons/fa";
 import Header from "../Components/Header";
 
 const SpeechReader = () => {
+  // Destructuring the functionalities from the useSpeechSynthesis hook
   const { speak, cancel, speaking, voices } = useSpeechSynthesis();
-  const [textInput, setTextInput] = useState("");
-  const [voiceIndex, setVoiceIndex] = useState("");
-  const [rate, setRate] = useState(1);
-  const textRef = useRef(""); // To keep track of the text input while restarting
 
+  // State to store the text input
+  const [textInput, setTextInput] = useState("");
+
+  // State to store the selected voice index
+  const [voiceIndex, setVoiceIndex] = useState("");
+
+  // State to store the speech rate
+  const [rate, setRate] = useState(1);
+
+  // Reference to keep track of the text input while restarting
+  const textRef = useRef("");
+
+  // Function to handle speaking the text
   const handleSpeak = () => {
     speak({ text: textInput, voice: voices[voiceIndex], rate: rate });
     textRef.current = textInput;
   };
 
+  // Function to stop speaking
   const handleStopSpeak = () => {
     cancel();
   };
 
+  // Function to handle rate change
   const handleRateChange = (e) => {
     setRate(parseFloat(e.target.value));
   };
@@ -43,6 +55,7 @@ const SpeechReader = () => {
 
   return (
     <div className="w-full min-h-screen  bg-gradient-to-r from-darkColor to-secondary text-white p-4">
+      {/* Header Component */}
       <Header />
       <div className="w-full min-h-screen flex flex-col justify-center items-center">
         {/* {speaking && <Loader />} */}
@@ -55,7 +68,7 @@ const SpeechReader = () => {
           </p>
         </header>
         <div className="w-full max-w-4xl flex flex-col justify-center items-center gap-y-4">
-          {/* Text area */}
+          {/* Text area to input the text */}
           <textarea
             className="w-full max-w-4xl min-h-[200px] border border-blue-400 p-4 text-black rounded-lg"
             onChange={(e) => {
@@ -64,7 +77,7 @@ const SpeechReader = () => {
             }}
             placeholder="Enter text to convert..."
           />
-          {/* Voice selection */}
+          {/* Voice selection dropdown */}
           <select
             className="w-full max-w-4xl border border-blue-400 p-2 text-black rounded-lg"
             value={voiceIndex || ""}
@@ -77,7 +90,7 @@ const SpeechReader = () => {
               </option>
             ))}
           </select>
-          {/* Rate selection */}
+          {/* Rate selection slider */}
           <div className="w-full max-w-4xl flex items-center">
             <input
               type="range"
@@ -90,7 +103,7 @@ const SpeechReader = () => {
             />
             <span className="text-xl font-bold ml-4">Rate: {rate}</span>
           </div>
-          {/* Speak button */}
+          {/* Speak/Stop button */}
           <button
             className={`py-2 px-6 rounded  text-white hover:scale-105 transform transition-transform`}
             onClick={speaking ? handleStopSpeak : handleSpeak}
