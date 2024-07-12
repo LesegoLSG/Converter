@@ -1,4 +1,8 @@
 import { useEffect, useRef, useState } from "react";
+import ToastNotification, {
+  notifySuccess,
+  notifyError,
+} from "../Components/Reusable/ToastNotification";
 
 const useVoiceToText = (usersOptions) => {
   const [isListening, setIsListening] = useState(false);
@@ -7,7 +11,7 @@ const useVoiceToText = (usersOptions) => {
 
   useEffect(() => {
     if (!("webkitSpeechRecognition" in window)) {
-      console.error("Web Speech API is not supported.");
+      alert("Web Speech API is not supported.");
       return;
     }
 

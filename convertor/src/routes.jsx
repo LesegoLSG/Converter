@@ -6,15 +6,15 @@ import SpeechReader from "./Pages/SpeechReader";
 // Define the routes for the application using createBrowserRouter
 const routes = createBrowserRouter([
   {
-    path: "/",
+    path: "Converter/",
     element: <MainPage />,
   },
   {
-    path: "/voicetotext",
+    path: "/Converter/voicetotext",
     element: <VoiceToTextPage />,
   },
   {
-    path: "/speechreader",
+    path: "/Converter/speechreader",
     element: <SpeechReader />,
   },
 ]);

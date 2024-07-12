@@ -6,10 +6,14 @@ import ToastNotification, {
   notifySuccess,
   notifyError,
 } from "../Components/Reusable/ToastNotification";
+import AlertModal from "../Components/Reusable/AlertModal";
 
 const VoiceToTextPage = () => {
   // State to store the text input
   const [textInput, setTextInput] = useState("");
+
+  // State to manage the modal visibility
+  const [showModal, setShowModal] = useState(true);
 
   // Custom hook for voice to text functionality
   const { isListening, transcript, startListening, stopListening } =
@@ -94,6 +98,12 @@ const VoiceToTextPage = () => {
       </div>
       {/* Toast Notification Component */}
       <ToastNotification />
+      {/* Modal component */}
+      <AlertModal
+        showModal={showModal}
+        setShowModal={setShowModal}
+        message="For the best experience, please use this feature on modern browsers like Chrome, Firefox, or Edge. Some functionalities might not work as expected on other browsers."
+      />
     </div>
   );
 };

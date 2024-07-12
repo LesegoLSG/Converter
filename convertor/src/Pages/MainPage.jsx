@@ -9,7 +9,7 @@ const MainPage = () => {
   // Initialize the navigation hook
   const navigate = useNavigate();
   return (
-    <section className="w-full min-h-screen  bg-gradient-to-r from-darkColor to-secondary text-white">
+    <section className="w-full min-h-screen  bg-gradient-to-r from-darkColor to-secondary text-white pb-16">
       {/* Header Component */}
       <Header />
       <div className="w-full min-h-screen flex flex-col justify-center items-center mt-16 md:m-0 ">
@@ -26,7 +26,7 @@ const MainPage = () => {
           {/* Text to Voice Section */}
           <div
             className="w-full md:w-[300px] h-[300px] flex flex-col justify-center items-center bg-action rounded-lg shadow-lg cursor-pointer transform transition-transform hover:scale-105 p-4"
-            onClick={() => navigate("/speechreader")}
+            onClick={() => navigate("/Converter/speechreader")}
           >
             <img src={textSpeech} alt="anim2" className="h-40" />
             <h1 className="text-2xl font-bold mt-4">Text to Voice</h1>
@@ -34,7 +34,7 @@ const MainPage = () => {
           {/* Voice to Text Section */}
           <div
             className="w-full md:w-[300px] h-[300px] flex flex-col justify-center items-center bg-action rounded-lg shadow-lg cursor-pointer transform transition-transform hover:scale-105 p-4"
-            onClick={() => navigate("/voicetotext")}
+            onClick={() => navigate("/Converter/voicetotext")}
           >
             <img src={speechText} alt="anim1" className="h-40" />
             <h1 className="text-2xl font-bold mt-4">Voice to Text</h1>
